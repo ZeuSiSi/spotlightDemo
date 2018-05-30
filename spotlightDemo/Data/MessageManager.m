@@ -34,6 +34,7 @@
 
 + (void)getDataToSpotlightCompletion:(void (^)(NSArray *))completionBlock {
     
+    //这个方法模拟在网络请求，然后将数据存入本地，在别的类中可以通过从本地取出数据存入coreSpotlight。当然在网络请求到数据后可以直接存入coreSpotlight不需要先存本地，具体操作根据具体场景选择
     [self saveDataToPlist];
     
     //从本地获取数据
@@ -66,6 +67,7 @@
             NSLog(@"save error");
         }else {
             NSLog(@"save success");
+            //为了使视图刷新所以将数据传出去进行刷新
             completionBlock(messageArr);
         }
         
