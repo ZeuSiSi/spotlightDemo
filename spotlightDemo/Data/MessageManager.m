@@ -50,7 +50,8 @@
         attributeSet.title = message.title;
         attributeSet.keywords = @[message.title,@"创造101",@"孟美岐"];
         attributeSet.contentDescription = message.content;
-        attributeSet.thumbnailData = UIImageJPEGRepresentation([UIImage imageNamed:message.icon],0.5);
+//        attributeSet.thumbnailData = UIImageJPEGRepresentation([UIImage imageNamed:message.icon],0.5);
+        attributeSet.thumbnailData = UIImagePNGRepresentation([UIImage imageNamed:message.icon]);
         
         CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:message.messageId domainIdentifier:@"zeus" attributeSet:attributeSet];
         // 过期的日期,默认过期的日期是一个月

@@ -52,6 +52,7 @@
 - (UIImageView *)imgvIcon {
     if (_imgvIcon == nil) {
         _imgvIcon = [[UIImageView alloc] init];
+        _imgvIcon.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _imgvIcon;
 }
