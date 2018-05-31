@@ -96,14 +96,34 @@
     
     NSString *idetifier = activity.userInfo[@"kCSSearchableItemActivityIdentifier"];
     
-    for (MMessage *mod in self.listArr) {
-        if ([mod.messageId isEqualToString:idetifier]) {
-            DetailViewController *detailVC = [[DetailViewController alloc] init];
-            detailVC.messageMod = mod;
-            [self.navigationController pushViewController:detailVC animated:YES];
-            break;
-        }
-    }
+    
+    [MessageManager getDataToSpotlightCompletion:^(NSArray *dataArr) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (dataArr.count == 0) {
+                self.tvList.hidden = YES;
+            }else {
+                self.btnGet.hidden = YES;
+                self.tvList.hidden = NO;
+                
+                self.listArr = dataArr;
+                [self.tvList reloadData];
+                
+                for (MMessage *mod in self.listArr) {
+                    if ([mod.messageId isEqualToString:idetifier]) {
+                        DetailViewController *detailVC = [[DetailViewController alloc] init];
+                        detailVC.messageMod = mod;
+                        [self.navigationController pushViewController:detailVC animated:YES];
+                        break;
+                    }
+                }
+            }
+        });
+        
+        
+    }];
+    
+    
     
     
 }
